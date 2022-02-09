@@ -1,7 +1,7 @@
 #IMPORT NECESSARY LIBRARIES
 #import joblib  #for importing your machine learning model
 from flask import Flask, render_template, request, jsonify, make_response
-import pandas as pd 
+import pandas as pd
 
 
 # SQLALCHEMY SETUP
@@ -12,9 +12,9 @@ from sqlalchemy import create_engine, func
 import psycopg2
 
 #os allows you to call in environment variables
-# we will set the remote environment variables in heroku 
+# we will set the remote environment variables in heroku
 from dotenv import load_dotenv
-import os 
+import os
 
 load_dotenv()
 
@@ -26,14 +26,14 @@ load_dotenv()
 #make sure you have your own .env on your computer
 #comment out when you plan to deploy from heroku
 
-url = os.getenv('URL')
+uri = os.getenv('URI')
 
 
 #uncomment line below when you want to deploy to heroku
-#url = os.environ.get("URL")
+#uri = os.environ.get("URI")
 
 
-engine = create_engine(f'{url}')
+engine = create_engine(f'{uri}')
 
 
 # reflect an existing database into a new model
@@ -52,7 +52,7 @@ app = Flask(__name__)
 # create route that renders index.html template
 @app.route("/", methods=["GET","POST"])
 def home():
-       
+
     return render_template("index.html")
 
 
@@ -60,19 +60,19 @@ def home():
 #using d3.json("/api/data")
 @app.route("/api/data")
 def data():
-    
-    
+
+
     # Create our session (link) from Python to the DB
     #session = Session(engine)
-    
+
     #Query Database. Check SqlAlchemy documentation for how to query
-    
+
     #Convert your query object into a list or dictionary format so it can
     # be jsonified
-    
-        
+
+
     #session.close()
-    
+
     #Return the JSON representation of your dictionary
     return ('jsonify(myData)')
 
