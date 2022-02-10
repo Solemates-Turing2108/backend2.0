@@ -26,11 +26,11 @@ load_dotenv()
 #make sure you have your own .env on your computer
 #comment out when you plan to deploy from heroku
 
-uri = os.getenv('URI')
+# uri = os.getenv('URI')
 
 
 #uncomment line below when you want to deploy to heroku
-#url = os.environ.get("URL")
+uri = os.environ.get("URI")
 
 engine = create_engine(f'{uri}')
 
