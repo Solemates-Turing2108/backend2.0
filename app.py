@@ -60,7 +60,7 @@ def index():
 
 #make an endpoint for data you are using in charts. You will use JS to call this data in
 #using d3.json("/api/data")
-@app.route("/shoes")
+@app.route("/api/v1/shoes")
 def data():
 
     # Create our session (link) from Python to the DB
@@ -95,7 +95,7 @@ def data():
 
     session.close()
 
-@app.route('/shoes/<id>')
+@app.route('/api/v1/shoes/<id>')
 def get_shoe(id):
     session = Session(engine)
     shoe = session.query(ShoesObject).get(id)
