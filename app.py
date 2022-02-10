@@ -73,7 +73,7 @@ def data():
     #session.close()
     
     #Return the JSON representation of your dictionary
-    return ('jsonify(myData)')
+    return ('hello world')
 
 if __name__ == '__main__':
     #delete debug part
