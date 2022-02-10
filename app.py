@@ -1,7 +1,7 @@
 #IMPORT NECESSARY LIBRARIES
 #import joblib  #for importing your machine learning model
 from flask import Flask, render_template, request, jsonify, make_response
-import pandas as pd 
+import pandas as pd
 
 
 # SQLALCHEMY SETUP
@@ -12,9 +12,9 @@ from sqlalchemy import create_engine, func
 import psycopg2
 
 #os allows you to call in environment variables
-# we will set the remote environment variables in heroku 
+# we will set the remote environment variables in heroku
 from dotenv import load_dotenv
-import os 
+import os
 
 load_dotenv()
 
@@ -49,29 +49,50 @@ app = Flask(__name__)
 
 
 # create route that renders index.html template
-@app.route("/", methods=["GET","POST"])
-def home():
-       
-    return render_template("index.html")
+# @app.route("/", methods=["GET","POST"])
+# def home():
+#
+#     return render_template("index.html")
+
+@app.route('/')
+def index():
+    return "Hello! Welcome to Solemates!"
+
+@app.route('/shoes')
+def get_shoes():
+    shoes = Shoe.query.all()
+    output = []
+    for shoe in shoes:
+        shoe_data = {
+                        "id": shoe.id,
+                        "side": shoe.side,
+                        "style": shoe.style,
+                        "size": shoe.size,
+                        "description": shoe.description,
+                        "seller_email": shoe.seller_email
+                    }
+        output.append(shoe_data)
+
+    return {"shoes": output}
 
 
 #make an endpoint for data you are using in charts. You will use JS to call this data in
 #using d3.json("/api/data")
 @app.route("/api/data")
 def data():
-    
-    
+
+
     # Create our session (link) from Python to the DB
     #session = Session(engine)
-    
+
     #Query Database. Check SqlAlchemy documentation for how to query
-    
+
     #Convert your query object into a list or dictionary format so it can
     # be jsonified
-    
-        
+
+
     #session.close()
-    
+
     #Return the JSON representation of your dictionary
     return ('hello world')
 
