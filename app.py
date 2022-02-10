@@ -26,12 +26,11 @@ load_dotenv()
 #make sure you have your own .env on your computer
 #comment out when you plan to deploy from heroku
 
-uri = os.getenv('URI')
+# uri = os.getenv('URI')
 
 
 #uncomment line below when you want to deploy to heroku
-#uri = os.environ.get("URI")
-
+uri = os.environ.get("URI")
 
 engine = create_engine(f'{uri}')
 
@@ -43,7 +42,7 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 #my table in pgadmin (postgres) is named envdata
-EnvironmentData = Base.classes.envdata
+ShoeData = Base.classes.shoe
 
 # create instance of Flask app
 app = Flask(__name__)
@@ -77,4 +76,5 @@ def data():
     return ('jsonify(myData)')
 
 if __name__ == '__main__':
+    #delete debug part
     app.run(debug=True)
