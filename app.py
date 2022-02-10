@@ -95,8 +95,23 @@ def data():
 
     session.close()
 
-    #Return the JSON representation of your dictionary
+@app.route('/shoes/<id>')
+def get_shoe(id):
+    session = Session(engine)
+    shoe = session.query(ShoesObject).get(id)
 
+
+    shoe_data = {
+                    "id": shoe.id,
+                    "side": shoe.side,
+                    "style": shoe.style,
+                    "size": shoe.size,
+                    "description": shoe.description,
+                    "brand": shoe.brand,
+                    "user_id": shoe.user_id
+                }
+    return (shoe_data)
+    session.close()
 # @app.route("/shoes")
 # def data():
 
