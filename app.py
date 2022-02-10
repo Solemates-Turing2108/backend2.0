@@ -106,6 +106,7 @@ def get_shoe(id):
                     "side": shoe.side,
                     "style": shoe.style,
                     "size": shoe.size,
+                    "photo_url": shoe.photo_url,
                     "description": shoe.description,
                     "brand": shoe.brand,
                     "user_id": shoe.user_id
