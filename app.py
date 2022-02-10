@@ -42,24 +42,63 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 #my table in pgadmin (postgres) is named envdata
-ShoeData = Base.classes.shoe
+ShoesObject = Base.classes.shoe
 
 # create instance of Flask app
 app = Flask(__name__)
 
 
 # create route that renders index.html template
-@app.route("/", methods=["GET","POST"])
-def home():
+# @app.route("/", methods=["GET","POST"])
+# def home():
+    # return render_template("index.html")
 
-    return render_template("index.html")
+@app.route("/")
+def index():
+    return "Welcome to Solemates!"
 
 
 #make an endpoint for data you are using in charts. You will use JS to call this data in
 #using d3.json("/api/data")
-@app.route("/api/data")
+@app.route("/shoes")
 def data():
 
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    #Query Database. Check SqlAlchemy documentation for how to query
+
+    #Convert your query object into a list or dictionary format so it can
+    # be jsonified
+
+    SData = session.query(ShoesObject).all()
+    myData = []
+
+    for shoe in SData:
+
+        fullSdata = {}
+
+        fullSdata = {
+            "id": shoe.id,
+            "side": shoe.side,
+            "style": shoe.style,
+            "size": shoe.size,
+            "photo_url": shoe.photo_url,
+            "description": shoe.description,
+            "brand":shoe.brand,
+            "user_id":shoe.user_id
+        }
+
+        myData.append(fullSdata)
+
+    return {"shoes": myData}
+
+    session.close()
+
+    #Return the JSON representation of your dictionary
+
+# @app.route("/shoes")
+# def data():
 
     # Create our session (link) from Python to the DB
     #session = Session(engine)
@@ -73,7 +112,6 @@ def data():
     #session.close()
 
     #Return the JSON representation of your dictionary
-    return ('hello world')
 
 if __name__ == '__main__':
     #delete debug part
