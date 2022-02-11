@@ -18,6 +18,9 @@ import os
 
 load_dotenv()
 
+from flask_cors import CORS
+app = Flask(__name__)
+CORS(app)
 
 #################################################
 # Database Setup
@@ -117,9 +120,20 @@ def get_shoe(id):
 #
 @app.route('/api/v1/users/<id>/shoes')
 def get_user_shoes(id):
+
     session = Session(engine)
 
-    user = session.query(UsersObject).get(id)
+    SData = session.query(ShoesObject).all()
+    # user = session.query(UsersObject).get(id)
+
+
+
+    # fullUdata = {
+    #     "id": user.id,
+    #     "name": user.name,
+    #     "email": user.email,
+    # }
+
     shoes = session.query(ShoesObject).filter_by(user_id = id)
 
     myData = []
@@ -140,7 +154,9 @@ def get_user_shoes(id):
         }
 
     myData.append(fullSdata)
+    print(id)
     return {"shoes": myData}
+
     session.close()
 # @app.route("/shoes")
 # def data():
