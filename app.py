@@ -43,6 +43,7 @@ Base.prepare(engine, reflect=True)
 
 #my table in pgadmin (postgres) is named envdata
 ShoesObject = Base.classes.shoe
+UsersObject = Base.classes.user
 
 # create instance of Flask app
 app = Flask(__name__)
@@ -112,6 +113,34 @@ def get_shoe(id):
                     "user_id": shoe.user_id
                 }
     return (shoe_data)
+    session.close()
+#
+@app.route('/api/v1/users/<id>/shoes')
+def get_user_shoes(id):
+    session = Session(engine)
+
+    user = session.query(UsersObject).get(id)
+    shoes = session.query(ShoesObject).filter_by(user_id = id)
+
+    myData = []
+
+    for shoe in shoes:
+
+        fullSdata = {}
+
+        fullSdata = {
+            "id": shoe.id,
+            "side": shoe.side,
+            "style": shoe.style,
+            "size": shoe.size,
+            "photo_url": shoe.photo_url,
+            "description": shoe.description,
+            "brand":shoe.brand,
+            "user_id":shoe.user_id
+        }
+
+    myData.append(fullSdata)
+    return {"shoes": myData}
     session.close()
 # @app.route("/shoes")
 # def data():
