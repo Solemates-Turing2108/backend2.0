@@ -100,6 +100,8 @@ def get_shoe(id):
     session = Session(engine)
     shoe = session.query(ShoesObject).get(id)
 
+    if shoe is None:
+        return ("the shoe is not found")
 
     shoe_data = {
                     "id": shoe.id,
