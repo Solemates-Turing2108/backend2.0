@@ -93,7 +93,6 @@ def data():
         myData.append(fullSdata)
 
     return {"shoes": myData}
-
     session.close()
 
 @app.route('/api/v1/shoes/<id>')
@@ -119,9 +118,7 @@ def get_shoe(id):
 def get_user_shoes(id):
     session = Session(engine)
 
-    user = session.query(UsersObject).get(id)
     shoes = session.query(ShoesObject).filter_by(user_id = id)
-
     myData = []
 
     for shoe in shoes:
@@ -139,9 +136,11 @@ def get_user_shoes(id):
             "user_id":shoe.user_id
         }
 
-    myData.append(fullSdata)
+        myData.append(fullSdata)
+
     return {"shoes": myData}
     session.close()
+
 # @app.route("/shoes")
 # def data():
 
