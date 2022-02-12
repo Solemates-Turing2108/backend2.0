@@ -102,7 +102,6 @@ def data():
         myData.append(fullSdata)
 
     return {"shoes": myData}
-
     session.close()
 
 @app.route('/api/v1/shoes/<id>')
@@ -110,6 +109,8 @@ def get_shoe(id):
     session = Session(engine)
     shoe = session.query(ShoesObject).get(id)
 
+    if shoe is None:
+        return ("the shoe is not found")
 
     shoe_data = {
                     "id": shoe.id,
@@ -123,25 +124,40 @@ def get_shoe(id):
                 }
     return (shoe_data)
     session.close()
-#
+
+#this isn't working right now
+@app.route('/api/v1/shoes', methods=['POST'])
+def add_shoe():
+    session = Session(engine)
+
+    shoe = ShoesObject(side=request.json["side"], brand=request.json["brand"], photo_url=request.json["photo_url"], style=request.json["style"], size=request.json["size"], description=request.json["description"], user_id=request.json["user_id"])
+
+    session.add(shoe)
+    session.commit()
+    return  ("the shoe " + f"{shoe.id}" + " has been successfully created.")
+    session.close()
+
+@app.route('/api/v1/shoes/<id>', methods=['DELETE'])
+def delete_shoe(id):
+    session = Session(engine)
+    shoe = session.query(ShoesObject).get(id)
+
+    if shoe is None:
+        return ("the shoe is not found")
+
+    session.delete(shoe)
+    session.commit()
+    return ("the shoe " + f"{shoe.id}" + " has been deleted!")
+    session.close()
+
+
+
 @app.route('/api/v1/users/<id>/shoes')
 def get_user_shoes(id):
 
     session = Session(engine)
 
-    SData = session.query(ShoesObject).all()
-    # user = session.query(UsersObject).get(id)
-
-
-
-    # fullUdata = {
-    #     "id": user.id,
-    #     "name": user.name,
-    #     "email": user.email,
-    # }
-
     shoes = session.query(ShoesObject).filter_by(user_id = id)
-
     myData = []
 
     for shoe in shoes:
@@ -159,11 +175,12 @@ def get_user_shoes(id):
             "user_id":shoe.user_id
         }
 
-    myData.append(fullSdata)
-    print(id)
+        myData.append(fullSdata)
+
     return {"shoes": myData}
 
     session.close()
+
 # @app.route("/shoes")
 # def data():
 
