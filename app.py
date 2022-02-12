@@ -113,7 +113,21 @@ def get_shoe(id):
                 }
     return (shoe_data)
     session.close()
-#
+
+@app.route('/api/v1/shoes/<id>', methods=['DELETE'])
+def delete_shoe(id):
+    session = Session(engine)
+    shoe = session.query(ShoesObject).get(id)
+
+    if shoe is None:
+        return ("the shoe is not found")
+
+    session.delete(shoe)
+    session.commit()
+    return ("the shoe " + f"{shoe.id}" + " has been deleted!")
+
+
+
 @app.route('/api/v1/users/<id>/shoes')
 def get_user_shoes(id):
     session = Session(engine)
