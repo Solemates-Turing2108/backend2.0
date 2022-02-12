@@ -121,7 +121,7 @@ def get_shoe(id):
 def add_shoe():
     session = Session(engine)
 
-    shoe = Shoe(side=request.json["side"], brand=request.json["brand"], photo_url=request.json["photo_url"], style=request.json["style"], size=request.json["size"], description=request.json["description"], user_id=request.json["user_id"])
+    shoe = ShoesObject(side=request.json["side"], brand=request.json["brand"], photo_url=request.json["photo_url"], style=request.json["style"], size=request.json["size"], description=request.json["description"], user_id=request.json["user_id"])
 
     session.add(shoe)
     session.commit()
