@@ -116,6 +116,18 @@ def get_shoe(id):
     return (shoe_data)
     session.close()
 
+#this isn't working right now
+@app.route('/api/v1/shoes', methods=['POST'])
+def add_shoe():
+    session = Session(engine)
+
+    shoe = Shoe(side=request.json["side"], brand=request.json["brand"], photo_url=request.json["photo_url"], style=request.json["style"], size=request.json["size"], description=request.json["description"], user_id=request.json["user_id"])
+
+    session.add(shoe)
+    session.commit()
+    return  ("the shoe " + f"{shoe.id}" + " has been successfully created.")
+    session.close()
+
 @app.route('/api/v1/shoes/<id>', methods=['DELETE'])
 def delete_shoe(id):
     session = Session(engine)
@@ -127,6 +139,7 @@ def delete_shoe(id):
     session.delete(shoe)
     session.commit()
     return ("the shoe " + f"{shoe.id}" + " has been deleted!")
+    session.close()
 
 
 
