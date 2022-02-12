@@ -35,6 +35,7 @@ from flask_mail import Mail, Message
 
 #uncomment line below when you want to deploy to heroku
 uri = os.environ.get("URI")
+email_password = os.environ.get("EMAIL_PASSWORD")
 
 engine = create_engine(f'{uri}')
 
@@ -57,7 +58,7 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_USERNAME'] = 'haewon208@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Qwer1234-5Turing'
+app.config['MAIL_PASSWORD'] = email_password
 # app.config['MAIL_DEBUG'] = True  #this and below wasn't there for https://mailtrap.io/blog/flask-email-sending/  if this is true, it will give you some error messages when it doesn't work
 # app.config['DEBUG'] = True  #this and below wasn't there for https://mailtrap.io/blog/flask-email-sending/  if this is true, it will give you some error messages when it doesn't work
 # app.config['TESTING'] = False #this one and the below together will make sure the emails aren't actually sent for testing
@@ -105,7 +106,7 @@ def send_mail():
     #or to add more recipient, you can also do:
     #msg.add_recipient('more1@gmail.com')
     #msg.add_recipient('more2@gmail.com')
-    msg.body = 'This is v2 second test email sent from Haewon\'s app. You don\'t have to reply.'
+    msg.body = 'This is v2 third test email with password hiding sent from Haewon\'s app. You don\'t have to reply.'
     # you can also do: making it bold for fun.  If you do both, the html will be sent
     # msg.html = '<b>This is a test email sent from Haewon\'s app. You don\'t have to reply.</b>'
     mail.send(msg)
