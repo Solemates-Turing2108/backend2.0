@@ -30,11 +30,11 @@ from flask_mail import Mail, Message
 #make sure you have your own .env on your computer
 #comment out when you plan to deploy from heroku
 
-# uri = os.getenv('URI')
+uri = os.getenv('URI')
 
 
 #uncomment line below when you want to deploy to heroku
-uri = os.environ.get("URI")
+# uri = os.environ.get("URI")
 email_password = os.environ.get("EMAIL_PASSWORD")
 
 engine = create_engine(f'{uri}')
@@ -98,19 +98,30 @@ mail = Mail(app)
 def index():
     return "Welcome to Solemates!"
 
-#need to pass parameters
-@app.route('/api/v1/email')
-def send_mail():
-    # msg = Message('Hey There', sender='email')  Hey there=title, we don't need sender because we configed it, then recipients
-    msg = Message('Hey There', recipients=['haewonito@gmail.com'])
-    #or to add more recipient, you can also do:
-    #msg.add_recipient('more1@gmail.com')
-    #msg.add_recipient('more2@gmail.com')
-    msg.body = 'This is v2 third test email with password hiding sent from Haewon\'s app. You don\'t have to reply.'
-    # you can also do: making it bold for fun.  If you do both, the html will be sent
-    # msg.html = '<b>This is a test email sent from Haewon\'s app. You don\'t have to reply.</b>'
-    mail.send(msg)
-    return "Email has been successfully been sent"
+#user3 has haewon208 and user4 has haewon201 email
+#shoe22 has user4
+#request needs { "buyer_id": 3}
+# @app.route('/api/v1/shoes/<id>/email')
+# def send_mail(id):
+#     session = Session(engine)
+#     shoe = session.query(ShoesObject).get(id)
+#     seller_id = shoe.user_id
+#     seller = session.query(UsersObject).get(seller_id)
+#     seller_email = seller.email
+#     buyder_id = request.json["buyer_id"]
+#     buyer = session.query(UsersObject).get(buyer_id)
+#     buyer_email = buyer.email
+#     # msg = Message('Hey There', sender='email')  Hey there=title, we don't need sender because we configed it, then recipients
+#     msg = Message('Hey There', recipients=[seller_email, buyer_email])
+#     #or to add more recipient, you can also do:
+#     #msg.add_recipient('more1@gmail.com')
+#     #msg.add_recipient('more2@gmail.com')
+#     # msg.body = 'This is v2 fourth test email from Haewon\'s app. You don\'t have to reply.'
+#     msg.body = 'f"{buyer_email}" has expressed interest in the shoe f"{shoe.id}"! The seller\'s email address is f"{seller_email}".'
+#     # you can also do: making it bold for fun.  If you do both, the html will be sent
+#     # msg.html = '<b>This is a test email sent from Haewon\'s app. You don\'t have to reply.</b>'
+#     mail.send(msg)
+#     return "Email has been successfully been sent to the seller"
 
 #make an endpoint for data you are using in charts. You will use JS to call this data in
 #using d3.json("/api/data")
@@ -222,21 +233,36 @@ def get_user_shoes(id):
     return {"shoes": myData}
     session.close()
 
-# @app.route("/shoes")
-# def data():
+@app.route('/api/v1/shoes/search')
+def search_shoe():
+    session = Session(engine)
 
-    # Create our session (link) from Python to the DB
-    #session = Session(engine)
+    side_query = request.json["side"]
+    style_query = request.json["style"]
+    size_query = request.json["size"]
 
-    #Query Database. Check SqlAlchemy documentation for how to query
+    filtered_shoes = session.query(ShoesObject).filter_by(side = side_query, style = style_query, size = size_query)
+    myData = []
 
-    #Convert your query object into a list or dictionary format so it can
-    # be jsonified
+    for shoe in filtered_shoes:
 
+        fullSdata = {}
 
-    #session.close()
+        fullSdata = {
+            "id": shoe.id,
+            "side": shoe.side,
+            "style": shoe.style,
+            "size": shoe.size,
+            "photo_url": shoe.photo_url,
+            "description": shoe.description,
+            "brand":shoe.brand,
+            "user_id":shoe.user_id
+        }
 
-    #Return the JSON representation of your dictionary
+        myData.append(fullSdata)
+
+    return {"shoes": myData}
+    session.close()
 
 if __name__ == '__main__':
     #delete debug part
