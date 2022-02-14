@@ -21,6 +21,9 @@ load_dotenv()
 #email
 from flask_mail import Mail, Message
 
+from flask_cors import CORS
+app = Flask(__name__)
+CORS(app)
 
 
 #################################################
@@ -52,6 +55,7 @@ UsersObject = Base.classes.user
 
 # create instance of Flask app
 app = Flask(__name__)
+
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
@@ -87,6 +91,13 @@ app.config['MAIL_ASCII_ATTACHMENTS'] = False #convert
 #instantiate flask mail
 mail = Mail(app)
 
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 
 # create route that renders index.html template
@@ -208,6 +219,7 @@ def delete_shoe(id):
 
 @app.route('/api/v1/users/<id>/shoes')
 def get_user_shoes(id):
+
     session = Session(engine)
 
     shoes = session.query(ShoesObject).filter_by(user_id = id)
@@ -231,6 +243,7 @@ def get_user_shoes(id):
         myData.append(fullSdata)
 
     return {"shoes": myData}
+
     session.close()
 
 @app.route('/api/v1/shoes/search')
