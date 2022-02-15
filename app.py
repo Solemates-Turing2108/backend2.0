@@ -33,11 +33,11 @@ CORS(app)
 #make sure you have your own .env on your computer
 #comment out when you plan to deploy from heroku
 
-# uri = os.getenv('URI')
+uri = os.getenv('URI')
 
 
 #uncomment line below when you want to deploy to heroku
-uri = os.environ.get("URI")
+# uri = os.environ.get("URI")
 
 email_password = os.environ.get("EMAIL_PASSWORD")
 
@@ -203,6 +203,19 @@ def add_shoe():
     session.commit()
     return  ("the shoe " + f"{shoe.id}" + " has been successfully created.")
     session.close()
+#
+# with app.test_client() as c:
+#     rv = c.post('/api/v1/shoes', json={
+#                                             "side": "left",
+#                                             "style": "boots",
+#                                             "size": 18,
+#                                             "photo_url": "url",
+#                                             "description": "cool shoes",
+#                                             "brand": "cool brand",
+#                                             "user_id": 4
+#                                         })
+#     json_data = rv.get_json()
+
 
 @app.route('/api/v1/users', methods=['POST'])
 def add_user():
