@@ -204,6 +204,17 @@ def add_shoe():
     return  ("the shoe " + f"{shoe.id}" + " has been successfully created.")
     session.close()
 
+@app.route('/api/v1/users', methods=['POST'])
+def add_user():
+    session = Session(engine)
+
+    user = UsersObject(name=request.json["name"], email=request.json["email"])
+
+    session.add(user)
+    session.commit()
+    return  ("the user " + f"{user.name}" + " has been successfully created.")
+    session.close()
+
 @app.route('/api/v1/shoes/<id>', methods=['DELETE'])
 def delete_shoe(id):
     session = Session(engine)
