@@ -19,7 +19,7 @@ import os
 load_dotenv()
 
 #email
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 
 from flask_cors import CORS
 app = Flask(__name__)
@@ -58,27 +58,12 @@ UsersObject = Base.classes.user
 app = Flask(__name__)
 
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'haewon208@gmail.com'
-app.config['MAIL_PASSWORD'] = email_password
-# app.config['MAIL_DEBUG'] = True  #this and below wasn't there for https://mailtrap.io/blog/flask-email-sending/  if this is true, it will give you some error messages when it doesn't work
-# app.config['DEBUG'] = True  #this and below wasn't there for https://mailtrap.io/blog/flask-email-sending/  if this is true, it will give you some error messages when it doesn't work
-# app.config['TESTING'] = False #this one and the below together will make sure the emails aren't actually sent for testing
-app.config['MAIL_DEFAULT_SENDER'] = 'haewon208@gmail.com'  #if you don't specify the sender, this will be sent
-# or you can also add:
-# app.config['MAIL_DEFAULT_SENDER'] = ('Haewon from the Solemates', 'anthony@prettyprinted.com')
-app.config['MAIL_MAX_EMAILS'] = 10 #just for preventing accidents when you are testing. None by default
-# app.config['MAIL_SUPPRESS_SEND'] = False #then if testing is true, the suppress_send is true too.
-app.config['MAIL_ASCII_ATTACHMENTS'] = False #convert
-# app.config['MAIL_SERVER']='smtp.gmail.com'   # location/address of your mail server   'localhost' if youa re running the server
-# app.config['MAIL_PORT'] = 587  # port where the email is sent through your server. depends on your email provider  typically 25 or 465
-# app.config['MAIL_USE_TLS'] = True # you probably need to play around with ssl and tls, switch it around with false and true and see which one works
+# app.config['MAIL_SERVER']='smtp.gmail.com'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USE_TLS'] = True
 # app.config['MAIL_USE_SSL'] = False
 # app.config['MAIL_USERNAME'] = 'haewon208@gmail.com'
-# app.config['MAIL_PASSWORD'] = 'Qwer1234_5Turing'
+# app.config['MAIL_PASSWORD'] = email_password
 # # app.config['MAIL_DEBUG'] = True  #this and below wasn't there for https://mailtrap.io/blog/flask-email-sending/  if this is true, it will give you some error messages when it doesn't work
 # # app.config['DEBUG'] = True  #this and below wasn't there for https://mailtrap.io/blog/flask-email-sending/  if this is true, it will give you some error messages when it doesn't work
 # # app.config['TESTING'] = False #this one and the below together will make sure the emails aren't actually sent for testing
@@ -87,10 +72,25 @@ app.config['MAIL_ASCII_ATTACHMENTS'] = False #convert
 # # app.config['MAIL_DEFAULT_SENDER'] = ('Haewon from the Solemates', 'anthony@prettyprinted.com')
 # app.config['MAIL_MAX_EMAILS'] = 10 #just for preventing accidents when you are testing. None by default
 # # app.config['MAIL_SUPPRESS_SEND'] = False #then if testing is true, the suppress_send is true too.
-# app.config['MAIL_ASCII_ATTACHMENTS'] = False #convert characters to ASCII for attachments (which has way less characters than unicode)
+# app.config['MAIL_ASCII_ATTACHMENTS'] = False #convert
+# # app.config['MAIL_SERVER']='smtp.gmail.com'   # location/address of your mail server   'localhost' if youa re running the server
+# # app.config['MAIL_PORT'] = 587  # port where the email is sent through your server. depends on your email provider  typically 25 or 465
+# # app.config['MAIL_USE_TLS'] = True # you probably need to play around with ssl and tls, switch it around with false and true and see which one works
+# # app.config['MAIL_USE_SSL'] = False
+# # app.config['MAIL_USERNAME'] = 'haewon208@gmail.com'
+# # app.config['MAIL_PASSWORD'] = 'Qwer1234_5Turing'
+# # # app.config['MAIL_DEBUG'] = True  #this and below wasn't there for https://mailtrap.io/blog/flask-email-sending/  if this is true, it will give you some error messages when it doesn't work
+# # # app.config['DEBUG'] = True  #this and below wasn't there for https://mailtrap.io/blog/flask-email-sending/  if this is true, it will give you some error messages when it doesn't work
+# # # app.config['TESTING'] = False #this one and the below together will make sure the emails aren't actually sent for testing
+# # app.config['MAIL_DEFAULT_SENDER'] = 'haewon208@gmail.com'  #if you don't specify the sender, this will be sent
+# # # or you can also add:
+# # # app.config['MAIL_DEFAULT_SENDER'] = ('Haewon from the Solemates', 'anthony@prettyprinted.com')
+# # app.config['MAIL_MAX_EMAILS'] = 10 #just for preventing accidents when you are testing. None by default
+# # # app.config['MAIL_SUPPRESS_SEND'] = False #then if testing is true, the suppress_send is true too.
+# # app.config['MAIL_ASCII_ATTACHMENTS'] = False #convert characters to ASCII for attachments (which has way less characters than unicode)
 
-#instantiate flask mail
-mail = Mail(app)
+# #instantiate flask mail
+# mail = Mail(app)
 
 
 @app.after_request
@@ -113,28 +113,28 @@ def index():
 # user3 has haewon208 and user4 has haewon201 email
 # shoe22 has user4
 # request needs to send as body: { "buyer_id": 3}
-@app.route('/api/v1/shoes/<id>/email')
-def send_mail(id):
-    session = Session(engine)
-    shoe = session.query(ShoesObject).get(id)
-    seller_id = shoe.user_id
-    seller = session.query(UsersObject).get(seller_id)
-    seller_email = seller.email
+# @app.route('/api/v1/shoes/<id>/email')
+# def send_mail(id):
+#     session = Session(engine)
+#     shoe = session.query(ShoesObject).get(id)
+#     seller_id = shoe.user_id
+#     seller = session.query(UsersObject).get(seller_id)
+#     seller_email = seller.email
 
-    buyer_id = request.json["buyer_id"]
-    buyer = session.query(UsersObject).get(buyer_id)
-    buyer_email = buyer.email
-    # msg = Message('Hey There', sender='email')  Hey there=title, we don't need sender because we configed it, then recipients
-    msg = Message('Hey There', recipients=[seller_email, buyer_email])
-    #or to add more recipient, you can also do:
-    #msg.add_recipient('more1@gmail.com')
-    #msg.add_recipient('more2@gmail.com')
-    # msg.body = 'This is v2 fourth test email from Haewon\'s app. You don\'t have to reply.'
-    msg.body = f'{buyer_email} has expressed interest in the shoe {shoe.id}! The seller\'s email address is {seller_email}.'
-    # you can also do: making it bold for fun.  If you do both, the html will be sent
-    # msg.html = '<b>This is a test email sent from Haewon\'s app. You don\'t have to reply.</b>'
-    mail.send(msg)
-    return "Email has been successfully been sent to the seller"
+#     buyer_id = request.json["buyer_id"]
+#     buyer = session.query(UsersObject).get(buyer_id)
+#     buyer_email = buyer.email
+#     # msg = Message('Hey There', sender='email')  Hey there=title, we don't need sender because we configed it, then recipients
+#     msg = Message('Hey There', recipients=[seller_email, buyer_email])
+#     #or to add more recipient, you can also do:
+#     #msg.add_recipient('more1@gmail.com')
+#     #msg.add_recipient('more2@gmail.com')
+#     # msg.body = 'This is v2 fourth test email from Haewon\'s app. You don\'t have to reply.'
+#     msg.body = f'{buyer_email} has expressed interest in the shoe {shoe.id}! The seller\'s email address is {seller_email}.'
+#     # you can also do: making it bold for fun.  If you do both, the html will be sent
+#     # msg.html = '<b>This is a test email sent from Haewon\'s app. You don\'t have to reply.</b>'
+#     mail.send(msg)
+#     return "Email has been successfully been sent to the seller"
 
 #make an endpoint for data you are using in charts. You will use JS to call this data in
 #using d3.json("/api/data")
