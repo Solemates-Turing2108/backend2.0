@@ -55,7 +55,7 @@ ShoesObject = Base.classes.shoe
 UsersObject = Base.classes.user
 
 # create instance of Flask app
-app = Flask(__name__)
+# app = Flask(__name__)
 
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
@@ -201,7 +201,7 @@ def add_shoe():
 
     session.add(shoe)
     session.commit()
-    return  ("the shoe " + f"{shoe.id}" + " has been successfully created.")
+    return  ("the shoe " + " has been successfully created.")
     session.close()
 #
 # with app.test_client() as c:
