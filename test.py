@@ -1,6 +1,87 @@
+import app
 from app import ShoesObject, UsersObject
 import pytest
 
+from flask import Flask, render_template, request, jsonify, make_response
+import pandas as pd
+
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, func
+import psycopg2
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+from flask_cors import CORS
+
+test_app = Flask(__name__)
+CORS(test_app)
+
+#comment out when you plan to deploy from heroku
+uri = os.getenv('URI')
+#uncomment line below when you want to deploy to heroku
+# uri = os.environ.get("URI")
+
+engine = create_engine(f'{uri}')
+
+Base = automap_base()
+
+Base.prepare(engine, reflect=True)
+
+ShoesObject = Base.classes.shoe
+UsersObject = Base.classes.user
+
+@test_app.route("/")
+def index():
+    return "Welcome to Solemates!"
+
+def test_home_page_get():
+    with test_app.test_client() as test_client:
+
+        response = test_client.get('/')
+        assert response.status_code == 200
+        assert b"Welcome to Solemates!" in response.data
+
+@test_app.route("/api/v1/shoes")
+def data():
+
+    session = Session(engine)
+
+    SData = session.query(ShoesObject).all()
+    myData = []
+
+    for shoe in SData:
+
+        fullSdata = {}
+
+        fullSdata = {
+            "id": shoe.id,
+            "side": shoe.side,
+            "style": shoe.style,
+            "size": shoe.size,
+            "photo_url": shoe.photo_url,
+            "description": shoe.description,
+            "brand":shoe.brand,
+            "user_id":shoe.user_id
+        }
+
+        myData.append(fullSdata)
+
+    return {"shoes": myData}
+    session.close()
+
+def test_shoes_page_get():
+    with test_app.test_client() as test_client:
+
+        response = test_client.get('/api/v1/shoes')
+        assert response.status_code == 200
+        assert b"side" in response.data
+        assert b"size" in response.data
+        assert b"brand" in response.data
+        assert b"description" in response.data
 
 # def test_example_postgres(postgresql):
 #     """Check main postgresql fixture."""
