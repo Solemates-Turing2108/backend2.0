@@ -31,7 +31,7 @@ Many people need only one out of a pair of shoes that they buy. Solemates ([FE d
   - `source .venv/bin/activate`
 - Run your own development server. In the terminal, run:
   - `python3 app.py`
-  - Your terminal will show you the url of your local server 
+  - Your terminal will show you the url of your local server
 - Create a .env file on the same level as the app.py. Assign the url for the postgres database in the form of:
   - `URL = postgresql://(full url from heroku postgres config variables)`
 - We have also hidden the password of the gmail we used. Change the email address in app.py to something you can use and put its password in the .env file as:
@@ -41,7 +41,7 @@ Many people need only one out of a pair of shoes that they buy. Solemates ([FE d
 # API Endpoints
 Endpoint : https://turingsolemates.herokuapp.com/
 
-  - **View all shoes**: 
+  - **View all shoes**:
     - Request: GET '/api/v1/shoes'
     - Response:
      ```
@@ -66,12 +66,12 @@ Endpoint : https://turingsolemates.herokuapp.com/
                     "style": "sneakers",      ,
                     "user_id": 2,
                     "photo_url": "some_url"
-         
+
                   }
                 ]
                }
       ```
- - **Search one shoe by id**: 
+ - **Search one shoe by id**:
     - Request: GET '/api/v1/shoes/<id>'
     - Response:
      ```
@@ -86,10 +86,10 @@ Endpoint : https://turingsolemates.herokuapp.com/
                     "photo_url": "some_url"
                   }
     ```
-  
- - **Add a shoe**: 
+
+ - **Add a shoe**:
     - Request: POST '/api/v1/shoes'
-     - As a raw jason body: 
+     - As a raw JSON body:
       ```
                              {
                                   "side": "side",
@@ -103,15 +103,15 @@ Endpoint : https://turingsolemates.herokuapp.com/
       ```
     - Response:
        `The shoe "{id}" has been successfully created.`
-  
-  - **Delete a shoe**: 
+
+  - **Delete a shoe**:
     - Request: POST '/api/v1/shoes/<id>'
     - Response:
        `The shoe " + {id} + " has been deleted!`
-  
-  - **Filter by size, side and style **: 
+
+  - **Filter by size, side and style **:
     - Request: GET '/api/v1/shoes/search'
-     - As a raw jason body: 
+     - As a raw JSON body:
      ```
                            {
                                 "side": "side",
@@ -121,11 +121,11 @@ Endpoint : https://turingsolemates.herokuapp.com/
      ```
     - Response:
       `The shoe "{id}" has been successfully created.`
-  
-  
-  - **Add a user**: 
+
+
+  - **Add a user**:
     - Request: POST '/api/v1/users'
-     - As a raw jason body:
+     - As a raw JSON body:
     ```
                              {
                                   "name": "name",
@@ -155,27 +155,14 @@ Endpoint : https://turingsolemates.herokuapp.com/
                     "style": "sneakers",      ,
                     "user_id": 2,
                     "photo_url": "some_url"
-         
+
                   }
                 ]
                }
       ```
-  
-  
-  - **Send an email to the potential seller and buyer with each other's email**: 
-    - Request: GET '/api/v1/shoes/<id>/email'
-        As a raw jason body: 
-        ```
-           {
-                "buyer_id": "buyer_id"
-            }
-        ```
-     - Response:
-      `Email has been successfully been sent to the seller`
-  
+
+
 
 # Contributors
 - Matthew Kimball  |  [Github](https://github.com/mekimball)   |   [LinkedIn](https://www.linkedin.com/in/mekimba)
 - Haewon Jeon      |  [Github](https://github.com/haewonito)   |   [LinkedIn](linkedin.com/in/haewonito)
-
-
