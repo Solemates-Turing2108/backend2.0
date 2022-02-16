@@ -1,6 +1,6 @@
 ## Solemates - Backend Flask App
 
-Many people need only one out of a pair of shoes that they buy. Solemates ([FE deployed endpoint](https://komodo-frontend.herokuapp.com)) ([BE deployed endpoint](https://turingsolemates.herokuapp.com/)) was created to connect people who have an extra shoe with those who need just one shoe. Once logged in, the user can browse shoes, filtered by size, side and style, and be connected to the seller via email if they find anything they like.    
+Many people need only one out of a pair of shoes that they buy. Solemates ([FE deployed endpoint](https://komodo-frontend.herokuapp.com)) ([BE deployed endpoint](https://turingsolemates.herokuapp.com/)) was created to connect people who have an extra shoe with those who need just one shoe. Once logged in, the user can browse shoes, filtered by size, side and style, and be connected to the seller via email if they find anything they like. Frontend Github repository can be found ([here](https://github.com/Solemates-Turing2108/frontend2.0))   
 
 #### What can I do on Solemates?
   - Create a user account
