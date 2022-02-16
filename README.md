@@ -1,31 +1,32 @@
 ## Solemates - Backend Flask App
 
-Many people need only one out of a pair of shoes that they buy. Solemates ([FE deployed endpoint](https://warm-citadel-47311.herokuapp.com/)) ([BE deployed endpoint](https://turingsolemates.herokuapp.com/)) was created to connect people who have an extra shoe with those who need just one shoe. Once logged in, the user can browse shoes, filtered by size, side and style, and be connected to the seller via email if they find anything they like. Frontend Github repository can be found [here](https://github.com/Solemates-Turing2108/frontend2.0)   
+Not everyone requires two shoes. This app was inspired by a post of someone with one leg showing off their shoe collection and stating that luckily they had a friend who was missing an opposite leg, and was the same size shoe and had similar styles in footware. So we decided to create an app for people to find their Solemate. <br>
+([FE deployed endpoint](https://warm-citadel-47311.herokuapp.com/)) <br>
+([BE deployed endpoint](https://turingsolemates.herokuapp.com/))<br>
+Once logged in, the user can browse shoes, filtered by size, side and style, and be connected to the seller via email if they find anything they like. Frontend Github repository can be found [here](https://github.com/Solemates-Turing2108/frontend2.0)   
 
 #### What can I do on Solemates?
   - Create a user account
   - Post a shoes you want to sell or share
-  - Get an email alert when someone is interested in your shoe
   - View available shoes
   - Search shoes by side, size and style
   - Get buyer's contact information for the shoes you are interested in.
 
 #### Stack
-- Python, Flask, Pytest, PostgreSQL, pgAdmin4, SQLAlchemy, Heroku, CircleCI
+- ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) 	![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white) 	![CircleCI](https://img.shields.io/badge/circle%20ci-%23161616.svg?style=for-the-badge&logo=circleci&logoColor=white) ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white) pgAdmin4, SQLAlchemy, Pytest
 
 
 # Readme Content
 - [Local Setup](#local-setup)
-- [External APIs](#external-apis)
-- [Database Schema](#database-schema)
+- [API Endpoints](#api-endpoints)
 - [Contributors](#contributors)
 
-# Local Setup.
+# Local Setup
 - Versions
   - Python 3.9.10
   - Flask 2.0.2
 - Fork and clone the repository
-- `cd` in your local repo version and install all the libraries specified in requires.txt
+- `cd` into your local repo version and install all the libraries specified in requirements.txt
 - This is not necessary, but if you want to be safe, create a virtual environment and activate it in the terminal:
   - `python3 -m venv .venv` (.venv is just the name of the virtual environment, so it can be anything you want)
   - `source .venv/bin/activate`
@@ -34,8 +35,6 @@ Many people need only one out of a pair of shoes that they buy. Solemates ([FE d
   - Your terminal will show you the url of your local server 
 - Create a .env file on the same level as the app.py. Assign the url for the postgres database in the form of:
   - `URL = postgresql://(full url from heroku postgres config variables)`
-- We have also hidden the password of the gmail we used. Change the email address in app.py to something you can use and put its password in the .env file as:
-  - `EMAIL_PASSWORD = your_password`
 
 
 # API Endpoints
@@ -89,7 +88,7 @@ Endpoint : https://turingsolemates.herokuapp.com/
   
  - **Add a shoe**: 
     - Request: POST '/api/v1/shoes'
-     - As a raw jason body: 
+     - As a raw JSON body: 
       ```
                              {
                                   "side": "side",
@@ -111,7 +110,7 @@ Endpoint : https://turingsolemates.herokuapp.com/
   
   - **Filter by size, side and style **: 
     - Request: GET '/api/v1/shoes/search'
-     - As a raw jason body: 
+     - As a raw JSON body: 
      ```
                            {
                                 "side": "side",
@@ -125,7 +124,7 @@ Endpoint : https://turingsolemates.herokuapp.com/
   
   - **Add a user**: 
     - Request: POST '/api/v1/users'
-     - As a raw jason body:
+     - As a raw JSON body:
     ```
                              {
                                   "name": "name",
@@ -160,18 +159,6 @@ Endpoint : https://turingsolemates.herokuapp.com/
                 ]
                }
       ```
-  
-  
-  - **Send an email to the potential seller and buyer with each other's email**: 
-    - Request: GET '/api/v1/shoes/<id>/email'
-        As a raw jason body: 
-        ```
-           {
-                "buyer_id": "buyer_id"
-            }
-        ```
-     - Response:
-      `Email has been successfully been sent to the seller`
   
 
 # Contributors
