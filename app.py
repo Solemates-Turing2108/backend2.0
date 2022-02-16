@@ -259,7 +259,7 @@ def get_user_shoes(id):
 
     session.close()
 
-@app.route('/api/v1/shoes/search')
+@app.route('/api/v1/shoes/search', methods=['POST'])
 def search_shoe():
     session = Session(engine)
 
