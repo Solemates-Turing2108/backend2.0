@@ -84,7 +84,7 @@ Endpoint : https://turingsolemates.herokuapp.com/
   
    - **Add a shoe**: 
      - Request: POST '/api/v1/shoes'
-     - As a raw jason body: 
+      - As a raw jason body: 
   ```
                              {
                                   "side": "side",
@@ -96,12 +96,12 @@ Endpoint : https://turingsolemates.herokuapp.com/
                                   "user_id": user_id
                               }
   ```
-      - Response:
+     - Response:
        `The shoe "{id}" has been successfully created.`
   
-      - **Add a shoe**: 
-      - Request: POST '/api/v1/shoes'
-                 As a raw jason body: 
+   - **Add a shoe**: 
+     - Request: POST '/api/v1/shoes'
+      - As a raw jason body: 
   ```
                          {
                               "side": "side",
@@ -113,30 +113,32 @@ Endpoint : https://turingsolemates.herokuapp.com/
                               "user_id": user_id
                           }
   ```
-      - Response:
+     - Response:
        `The shoe " + {id} + " has been deleted!`
   
-      - **Filter by size, side and style **: 
-      - Request: GET '/api/v1/shoes/search'
-        As a raw jason body: 
-           {
-                "side": "side",
-                "style": "style",
-                "size": size
-            }
-
-      - Response:
+    - **Filter by size, side and style **: 
+     - Request: GET '/api/v1/shoes/search'
+       - As a raw jason body: 
+ ```
+                           {
+                                "side": "side",
+                                "style": "style",
+                                "size": size
+                            }
+```
+     - Response:
        `The shoe "{id}" has been successfully created.`
   
   
-        - **Add a user**: 
+    - **Add a user**: 
       - Request: POST '/api/v1/users'
-        As a raw jason body: 
-           {
-                "name": "name",
-                "email": "email"
-            }
-
+```
+        - As a raw jason body: 
+                             {
+                                  "name": "name",
+                                  "email": "email"
+                              }
+```
       - Response:
         ```
               {
@@ -167,8 +169,8 @@ Endpoint : https://turingsolemates.herokuapp.com/
       ```
   
   
-    - **Send an email to the potential seller and buyer with each other's email**: 
-      - Request: GET '/api/v1/shoes/<id>/email'
+   - **Send an email to the potential seller and buyer with each other's email**: 
+     - Request: GET '/api/v1/shoes/<id>/email'
         As a raw jason body: 
            {
                 "buyer_id": "buyer_id"
