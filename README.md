@@ -99,20 +99,8 @@ Endpoint : https://turingsolemates.herokuapp.com/
      - Response:
        `The shoe "{id}" has been successfully created.`
   
-   - **Add a shoe**: 
-     - Request: POST '/api/v1/shoes'
-      - As a raw jason body: 
-     ```
-                         {
-                              "side": "side",
-                              "style": "style",
-                              "size": size,
-                              "photo_url": "url",
-                              "description": "description",
-                              "brand": "brand",
-                              "user_id": user_id
-                          }
-      ```
+   - **Delete a shoe**: 
+     - Request: POST '/api/v1/shoes/<id>'
      - Response:
        `The shoe " + {id} + " has been deleted!`
   
