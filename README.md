@@ -32,6 +32,11 @@ Many people need only one out of a pair of shoes that they buy. Solemates ([FE d
 - Run your own development server. In the terminal, run:
   - `python3 app.py`
   - Your terminal will show you the url of your local server 
+- Create a .env file on the same level as the app.py. Assign the url for the postgres database in the form of:
+  - `URL = postgresql://(full url from heroku postgres config variables)`
+- We have also hidden the password of the gmail we used. Change the email address in app.py to something you can use and put its password in the .env file as:
+  - `EMAIL_PASSWORD = your_password`
+
 
 # API Endpoints
 Endpoint : https://turingsolemates.herokuapp.com/
@@ -168,90 +173,9 @@ Endpoint : https://turingsolemates.herokuapp.com/
      - Response:
       `Email has been successfully been sent to the seller`
   
-Type: [Photo](#photo)
-    - Arguments: 
-        ```
-          argument :keyword, String, required: true
-        ```
-  - **Get Photos**: all photos (user uploaded as well as those saved from Unsplash)
-    - Type: [Photo](#photo)
-    - Arguments: none
-
-#### Users
-  - **Get User**: user by ID
-    - Type: [User](#user)
-    - Arguments: 
-        ```
-          argument :id, ID, required: true
-        ```
-  - **Get Users**: all users
-    - Type: [User](#user)
-    - Arguments: none
-
-#### Trips 
-  - **Get Trip**: get a trip by ID
-    - Type: [Trip](#trip)
-    - Arguments: 
-        ```
-          argument :id, ID, required: true
-        ```
-        
-        
-# External APIs
-This API consumes the following APIs:
-- [Twilio](https://www.twilio.com/docs/sms/api) to send text messages
-- [MapQuest Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/) to provide map image
-
-# Database Schema
-
-<img width="1096" alt="Screen Shot 2022-01-13 at 5 00 21 PM" src="https://user-images.githubusercontent.com/86392608/149428762-bd0fd620-42f6-4c31-ac1f-e62c784de567.png">
-
 
 # Contributors
-- Jacob Yarborough |  [Github](https://github.com/jacobyarborough)   |   [LinkedIn](https://www.linkedin.com/in/jacob-yarborough/)
-- Haewon Jeon      |  [Github](https://github.com/haewonito)   |   [LinkedIn](linkedin.com/in/haewonito/)
-- Matt Holmes      |  [Github](https://github.com/matthewjholmes)   |   [LinkedIn](https://www.linkedin.com/in/matthew-j-holmes/)
-- Stephanie Helm   |  [Github](https://github.com/stephaniemhelm)   |   [LinkedIn](https://www.linkedin.com/in/stephanie-helm-a4a032220/)
-- Micha Bernhard   |  [Github](https://github.com/michab17)   |   [LinkedIn](https://www.linkedin.com/in/micha-bernhard/)
+- Matthew Kimball  |  [Github](https://github.com/mekimball)   |   [LinkedIn](https://www.linkedin.com/in/mekimba)
+- Haewon Jeon      |  [Github](https://github.com/haewonito)   |   [LinkedIn](linkedin.com/in/haewonito)
 
-
-
-
-
-
-
-# Flask Project
-
-## Steps
-
-#### 1) Create a new virtual conda environment, activate that environment
-This is not necessary, but will make deploying to heroku more efficient. When you pip freeze your requierment's file, you
-will only capture the libraries necessary to run your app. 
-
-#### 2) pip install requirements
-Likely Need
-- flask
-- python-dotenv
-- pandas
-- gunicorn
-
-if you are using postgres
-- sqlalchemy
-- psycopg2 (if this gives you an error, try psycopg2-binary)
-
-#### 3) pip freeze > requirements.txt 
-This step has already been done for you. Only repeat if you have add new libraries not included here
-
-#### 4) delete the dataclasse library from the requirements.txt
-If you remake the requirements.txt file, delete the dataclasse library. It throws an error in Heroku
-
-### 5) in Heroku add a config variable that is your database url 
-
-The config variable called DATABASE_URL that automatically populates with the Heroku Postgres Add-on is missing 'ql' at the end of 'postgres' at the start of the url. You can not edit this directly. So you need to make a new key:value pair below it. 
-
-For this app I called the new DATABASE_URL just URL. 
-
-### 6) Make sure you have a .env file on the same level as thr app.py. Assign the url for the postgres database to the same variable name as you did in Heroku. For this app, my .env contains:
-
-URL = postgresql://.....(full url from heroku postgres config variables)
 
