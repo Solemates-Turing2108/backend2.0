@@ -104,30 +104,30 @@ Endpoint : https://turingsolemates.herokuapp.com/
     - Response:
        `The shoe " + {id} + " has been deleted!`
   
-    - **Filter by size, side and style **: 
-     - Request: GET '/api/v1/shoes/search'
-       - As a raw jason body: 
-    ```
+  - **Filter by size, side and style **: 
+    - Request: GET '/api/v1/shoes/search'
+     - As a raw jason body: 
+     ```
                            {
                                 "side": "side",
                                 "style": "style",
                                 "size": size
                             }
+     ```
+    - Response:
+      `The shoe "{id}" has been successfully created.`
+  
+  
+  - **Add a user**: 
+    - Request: POST '/api/v1/users'
+     - As a raw jason body:
     ```
-     - Response:
-       `The shoe "{id}" has been successfully created.`
-  
-  
-    - **Add a user**: 
-      - Request: POST '/api/v1/users'
-```
-        - As a raw jason body: 
                              {
                                   "name": "name",
                                   "email": "email"
                               }
-```
-      - Response:
+    ```
+    - Response:
         ```
               {
               "shoes": [
@@ -157,15 +157,16 @@ Endpoint : https://turingsolemates.herokuapp.com/
       ```
   
   
-   - **Send an email to the potential seller and buyer with each other's email**: 
-     - Request: GET '/api/v1/shoes/<id>/email'
+  - **Send an email to the potential seller and buyer with each other's email**: 
+    - Request: GET '/api/v1/shoes/<id>/email'
         As a raw jason body: 
+        ```
            {
                 "buyer_id": "buyer_id"
             }
-
-      - Response:
-       `Email has been successfully been sent to the seller`
+        ```
+     - Response:
+      `Email has been successfully been sent to the seller`
   
 Type: [Photo](#photo)
     - Arguments: 
