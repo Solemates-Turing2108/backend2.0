@@ -85,7 +85,7 @@ Endpoint : https://turingsolemates.herokuapp.com/
    - **Add a shoe**: 
      - Request: POST '/api/v1/shoes'
       - As a raw jason body: 
-  ```
+    ```
                              {
                                   "side": "side",
                                   "style": "style",
@@ -95,14 +95,14 @@ Endpoint : https://turingsolemates.herokuapp.com/
                                   "brand": "brand",
                                   "user_id": user_id
                               }
-
+    ```
      - Response:
        `The shoe "{id}" has been successfully created.`
   
    - **Add a shoe**: 
      - Request: POST '/api/v1/shoes'
       - As a raw jason body: 
-  ```
+     ```
                          {
                               "side": "side",
                               "style": "style",
@@ -112,20 +112,20 @@ Endpoint : https://turingsolemates.herokuapp.com/
                               "brand": "brand",
                               "user_id": user_id
                           }
-  ```
+      ```
      - Response:
        `The shoe " + {id} + " has been deleted!`
   
     - **Filter by size, side and style **: 
      - Request: GET '/api/v1/shoes/search'
        - As a raw jason body: 
- ```
+    ```
                            {
                                 "side": "side",
                                 "style": "style",
                                 "size": size
                             }
-```
+    ```
      - Response:
        `The shoe "{id}" has been successfully created.`
   
