@@ -1,9 +1,7 @@
-import app
 from app import ShoesObject, UsersObject
 import pytest
 
 from flask import Flask, render_template, request, jsonify, make_response
-import pandas as pd
 
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -15,24 +13,14 @@ import os
 
 load_dotenv()
 
-from flask_cors import CORS
 
 test_app = Flask(__name__)
-CORS(test_app)
 
-#comment out when you plan to deploy from heroku
 uri = os.getenv('URI')
-#uncomment line below when you want to deploy to heroku
-# uri = os.environ.get("URI")
 
 engine = create_engine(f'{uri}')
-
 Base = automap_base()
-
 Base.prepare(engine, reflect=True)
-
-ShoesObject = Base.classes.shoe
-UsersObject = Base.classes.user
 
 @test_app.route("/")
 def index():
@@ -83,12 +71,12 @@ def test_shoes_page_get():
         assert b"brand" in response.data
         assert b"description" in response.data
 
-# def test_example_postgres(postgresql):
-#     """Check main postgresql fixture."""
-#     cur = postgresql.cursor()
-#     cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
-#     postgresql.commit()
-#     cur.close()
+def test_example_postgres(postgresql):
+    """Check main postgresql fixture."""
+    cur = postgresql.cursor()
+    cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+    postgresql.commit()
+    cur.close()
 
 def test_add_user():
     user = UsersObject(name="test", email="test@email.com")
