@@ -82,9 +82,9 @@ Endpoint : https://turingsolemates.herokuapp.com/
                   }
     ```
   
-    - **Add a shoe**: 
-      - Request: POST '/api/v1/shoes'
-        As a raw jason body: 
+   - **Add a shoe**: 
+     - Request: POST '/api/v1/shoes'
+     - As a raw jason body: 
   ```
                              {
                                   "side": "side",
