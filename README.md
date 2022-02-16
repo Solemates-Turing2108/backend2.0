@@ -95,7 +95,7 @@ Endpoint : https://turingsolemates.herokuapp.com/
                                   "brand": "brand",
                                   "user_id": user_id
                               }
-  ```
+
      - Response:
        `The shoe "{id}" has been successfully created.`
   
