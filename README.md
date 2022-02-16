@@ -80,7 +80,7 @@ Endpoint : https://turingsolemates.herokuapp.com/
                     "user_id": 1,
                     "photo_url": "some_url"
                   }
-
+    ```
   
     - **Add a shoe**: 
       - Request: POST '/api/v1/shoes'
@@ -100,17 +100,18 @@ Endpoint : https://turingsolemates.herokuapp.com/
   
       - **Add a shoe**: 
       - Request: POST '/api/v1/shoes'
-        As a raw jason body: 
-           {
-                "side": "side",
-                "style": "style",
-                "size": size,
-                "photo_url": "url",
-                "description": "description",
-                "brand": "brand",
-                "user_id": user_id
-            })
-
+                 As a raw jason body: 
+  ```
+                         {
+                              "side": "side",
+                              "style": "style",
+                              "size": size,
+                              "photo_url": "url",
+                              "description": "description",
+                              "brand": "brand",
+                              "user_id": user_id
+                          }
+  ```
       - Response:
        `The shoe " + {id} + " has been deleted!`
   
