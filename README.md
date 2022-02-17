@@ -1,7 +1,7 @@
 ## Solemates - Backend Flask App
 
 Not everyone requires two shoes. This app was inspired by a post of someone with one leg showing off their shoe collection and stating that luckily they had a friend who was missing an opposite leg, and was the same size shoe and had similar styles in footware. So we decided to create an app for people to find their Solemate. <br>
-([FE deployed endpoint](https://warm-citadel-47311.herokuapp.com/)) <br>
+([FE deployed endpoint](https://solemateturing.herokuapp.com/)) <br>
 ([BE deployed endpoint](https://turingsolemates.herokuapp.com/))<br>
 Once logged in, the user can browse shoes, filtered by size, side and style, and be connected to the seller via email if they find anything they like. Frontend Github repository can be found [here](https://github.com/Solemates-Turing2108/frontend2.0)   
 
